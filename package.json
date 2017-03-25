@@ -1,0 +1,27 @@
+{
+  "name": "poestashtracker",
+  "version": "1.0.0",
+  "description": "Path Of Exile stash tab tracker",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chris Haining",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-cookies": "^1.6.3",
+    "body-parser": "^1.17.1",
+    "bootstrap": "^3.3.7",
+    "bootstrap-toggle": "^2.2.2",
+    "cors-anywhere": "^0.4.0",
+    "express": "^4.15.2",
+    "grunt": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "jquery": "^3.2.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.0",
+    "requirejs": "^2.3.3",
+    "requirejs-domready": "^2.0.3"
+  }
+}

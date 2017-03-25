@@ -1,0 +1,36 @@
+body {
+  padding-top: 50px;
+}
+.mainbody {
+  padding: 40px 0px;
+  text-align: center;
+}
+.poe-tab-name > span {
+  background-color: rgba(255,255,255,0.8);
+  padding: 3px;
+  border-radius: 5px;
+  min-width: 7em;
+  display: inline-block;
+}
+
+
+.settings-form {
+  border-radius: 5px;
+  border: 1px solid grey;
+  margin-bottom: 1em;
+}
+
+.settings-form legend {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+.settings-form .input-group {
+  margin: 5px;
+}
+
+.settings-form .input-lg {
+  height: 48px;
+}
