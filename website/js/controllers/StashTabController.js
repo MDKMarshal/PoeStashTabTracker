@@ -17,9 +17,9 @@ define(['angular'], function (angular){
         ).then(tabs => $scope.Tabs = tabs);
       }
 
-      $scope.SelectTab = function(tab){
+      $scope.SelectTab = function(tab) {
         $scope.SelectedTab = tab;
-      };
+      }
 
       $scope.GetTabContents = function(tab) {
         if(tab.Track){
@@ -29,6 +29,21 @@ define(['angular'], function (angular){
         }
         else {
           $scope.SelectedTab.Items = [];
+        }
+      }
+
+      $scope.TrackTabContents = function(tab) {
+        // Always clear the tab, we're starting from a fresh slate either way
+        tab.Items = [];
+
+        if(tab.Track){
+          // Callback instead of a promise, as we're doing this repeatedly
+          StashTabService.TrackTabContents(tab.Id, 6000, function(items){
+            tab.Items = tab.Items.concat(items);
+          });
+        }
+        else {
+          StashTabService.CancelTabTracking(tab.Id);
         }
       }
     }

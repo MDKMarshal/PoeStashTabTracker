@@ -13,6 +13,13 @@ body {
   display: inline-block;
 }
 
+.stash-tab-items span.item-name {
+  background-color: #555;
+  padding: 3px;
+  border-radius: 5px;
+  min-width: 7em;
+  display: inline-block;
+}
 
 .settings-form {
   border-radius: 5px;
@@ -33,4 +40,55 @@ body {
 
 .settings-form .input-lg {
   height: 48px;
+}
+
+.Normal { color: #ffffff; }
+.Magic {color: #9090ee;}
+.Rare { color: #ffff77; }
+.Unique {color: #E28246;}
+.Gem { color: #ffffff; }
+.Currency { color: #ffffff; }
+.DivinationCard { color: #ffffff; }
+.QuestItem { color: #ffffff; }
+.Prophecy { color: #ffffff; }
+.Relic { color: #ffffff; }
+.Corrupted, .Unidentified { color: #AA0000;}
+
+.stash-tab-items > .list-group-item {
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+.stash-tab-items .item-rarity {
+  background-color: #555;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 3px;
+  border-radius: 5px;
+  min-width: 4em;
+  display: inline-block;
+}
+
+.list-group-addon {
+  position: absolute;
+  top: 0;
+  bottom:0;
+  z-index: 2;
+  display: block;
+  text-align: center;
+  pointer-events: none;
+  padding: 12px 0.5em;
+  line-height: 1;
+  color: #555555;
+  text-align: center;
+  background-color: #eee;
+  border-radius: 4px;
+  white-space: nowrap;
+  padding-right: 0.5em;
+}
+.list-group-addon:first-child { left:0; border-right: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; }
+.list-group-addon:last-child { right:0; border-left: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; }
+.list-group-item-cust {
+  padding-left:  55px;
+  padding-right: 55px;
 }

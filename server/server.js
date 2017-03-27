@@ -12,6 +12,8 @@ app.use(express.static('../website'));
 var SessionKey = '';
 var AccountName = '';
 
+var cachedItems = {};
+
 app.post('/session', function (req, res){
   SessionKey = req.body.SessionKey;
   AccountName = req.body.AccountName;
@@ -37,7 +39,9 @@ app.get('/tabs', function (req, res){
 });
 
 app.get('/tabs/:id', function (req, res){
-  console.log('Getting contents of tab ' + req.params.id);
+  var tabId = req.params.id;
+
+  console.log('Getting contents of tab ' + tabId);
 
   var stashTabUrl = 'https://www.pathofexile.com/character-window/get-stash-items?league=Legacy&tabs=1&tabIndex=' + req.params.id + '&accountName=' + AccountName;
 
@@ -46,7 +50,25 @@ app.get('/tabs/:id', function (req, res){
   j.setCookie(cookie, stashTabUrl);
 
   rp({ uri: stashTabUrl, method: 'GET', jar: j }).then(function(response) {
-    res.send(response);
+    var itemsFromApi = JSON.parse(response).items;
+
+    if(!cachedItems[tabId]) {
+      console.log('First request for tab ' + tabId);
+      cachedItems[tabId] = itemsFromApi;
+      res.send([]);
+    }
+    else {
+      console.log(
+        'Update request for tab ' + tabId + ', cache: ' + (cachedItems[tabId] || []).length + ', current: ' + itemsFromApi.length
+      );
+      
+      var itemsToSend = _itemDiff(cachedItems[tabId], itemsFromApi);
+      
+      console.log('New items to send: ' + itemsToSend.length);
+
+      cachedItems[tabId] = itemsFromApi;
+      res.send(itemsToSend);
+    }
   }).catch(err => {
     console.log(err);
     res.send(false);
@@ -54,3 +76,15 @@ app.get('/tabs/:id', function (req, res){
 });
 
 app.listen(httpPort, () => console.log('http server started on ' + httpPort));
+
+function _itemDiff(oldItems, newItems) {
+  oldItems = oldItems || [];
+  newItems = newItems || [];
+
+  if(oldItems.length == 0){
+    return newItems;
+  }
+
+  var oldMap = oldItems.reduce(((a, v) => {a[v.id] = true; return a;}), {});
+  return newItems.filter(i => !oldMap.hasOwnProperty(i.id));
+}

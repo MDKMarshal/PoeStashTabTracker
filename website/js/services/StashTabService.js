@@ -1,18 +1,7 @@
-define(['angular'], function (angular){
-  return ['$http', '$sce', 
-    function StashTabService($http, $sce){
-      var FrameTypes = [
-        'Normal',
-        'Magic',
-        'Rare',
-        'Unique',
-        'Gem',
-        'Currency',
-        'Divination card',
-        'Quest item',
-        'Prophecy',
-        'Relic'
-      ];
+define(['angular', 'models/ItemModel'], function (angular, ItemModel){
+  return ['$http', '$sce', '$timeout', 
+    function StashTabService($http, $sce, $timeout){
+      this.TrackedTabs = {};
 
       this.ApiUrl = 'http://www.pathofexile.com/character-window/get-stash-items';
 
@@ -34,10 +23,10 @@ define(['angular'], function (angular){
 
           return response.data;
         }).then(function(data){
-
           return data.tabs.filter(function(t){
             return !t.hidden;
           }).map(function(t){
+            // TODO: Convert to tab model
             return {
               Id: t.i,
               Name: t.n,
@@ -47,27 +36,35 @@ define(['angular'], function (angular){
               Items: []
             };
           });
-
         }).catch(err => console.log(err));
       }
 
       this.GetTabContents = function _getTabContents(tabId) {
-       return $http.get(
-         'http://localhost:3000/tabs/' + tabId
-       ).then(function(data){
-         return data.data.items.map(function(i){
-           i.name = i.name.replace('<<set:MS>><<set:M>><<set:S>>', '');
+        return $http.get(
+          'http://localhost:3000/tabs/' + tabId
+        ).then(function(response){
+          return response.data.map(function(i){
+            return new ItemModel(i);
+          });
+        });
+      }
 
-           if(!i.name) {
-             i.name = i.typeLine;
-             i.typeLine = '';
-           }
+      this.TrackTabContents = function _trackTabContents(tabId, duration, callback) {
+        this.TrackedTabs[tabId] = _getContentsAndReTrack.call(this, tabId, duration, callback);
+      }
 
-           i.rarity = FrameTypes[i.frameType];
+      this.CancelTabTracking = function _cancelTabTracking(tabId) {
+        $timeout.cancel(this.TrackedTabs[tabId]);
+      }
 
-           return i;
-         });
-       });
+      function _getContentsAndReTrack(tabId, duration, callback){
+        return $timeout(() => {
+          this.GetTabContents(tabId).then(
+            items => callback(items)
+          ).then(() => {
+            this.TrackedTabs[tabId] = _getContentsAndReTrack.call(this, tabId, duration, callback);
+          });
+        }, duration);
       }
 
       function _buildRgbString(colour) {
