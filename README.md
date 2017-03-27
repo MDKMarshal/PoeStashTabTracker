@@ -8,7 +8,7 @@ Tracker for non-public Path of Exile stash tabs. Currently an experiment in aqui
   * Path of Exile account & session ID
 
 # How do I get a sesison Id?
-I'm not telling you. No, really. If I were malicoious, I could theoretically accounts with session ID's. So, if you can figure out how to get a sesison ID, I reckon you should be able to inspect this code to confirm that I'm not going to steal your login details or do anything nefarious. With any luck, if you get this running you should be satisfied that I'm personally never seeing your session ID or any private information.
+I'm not telling you. No, really. If I were malicious, I could theoretically accounts with session ID's. So, if you can figure out how to get a sesison ID, I reckon you should be able to inspect this code to confirm that I'm not going to steal your login details or do anything nefarious. With any luck, if you get this running you should be satisfied that I'm personally never seeing your session ID or any private information.
 
 Seriously, it's pretty easy to get a session ID. Go play with some of the other PoE item pricing web tools and you should figure it out eventually.
 
