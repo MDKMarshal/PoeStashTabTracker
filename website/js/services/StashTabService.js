@@ -43,9 +43,8 @@ define(['angular', 'models/ItemModel'], function (angular, ItemModel){
         return $http.get(
           'http://localhost:3000/tabs/' + tabId
         ).then(function(response){
-          return response.data.map(function(i){
-            return new ItemModel(i);
-          });
+          response.data.Added = response.data.Added.map(i => new ItemModel(i));
+          return response.data;
         });
       }
 

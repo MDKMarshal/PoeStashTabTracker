@@ -55,19 +55,27 @@ app.get('/tabs/:id', function (req, res){
     if(!cachedItems[tabId]) {
       console.log('First request for tab ' + tabId);
       cachedItems[tabId] = itemsFromApi;
-      res.send([]);
+      res.send({
+        Added: [],
+        Removed: []
+      });
     }
     else {
       console.log(
         'Update request for tab ' + tabId + ', cache: ' + (cachedItems[tabId] || []).length + ', current: ' + itemsFromApi.length
       );
       
-      var itemsToSend = _itemDiff(cachedItems[tabId], itemsFromApi);
-      
-      console.log('New items to send: ' + itemsToSend.length);
+      var addedItems = _itemDiff(cachedItems[tabId], itemsFromApi);
+      var removedDiff = _itemDiff(itemsFromApi, cachedItems[tabId]);
+      var removedItems = removedDiff.reduce(((a, v) => {a[v.id] = true; return a;}), {});
+
+      console.log('Added ' + addedItems.length + ', Removed ' + removedDiff.length );
 
       cachedItems[tabId] = itemsFromApi;
-      res.send(itemsToSend);
+      res.send({
+        Added: addedItems,
+        Removed: removedItems
+      });
     }
   }).catch(err => {
     console.log(err);

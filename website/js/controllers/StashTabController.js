@@ -38,8 +38,11 @@ define(['angular'], function (angular){
 
         if(tab.Track){
           // Callback instead of a promise, as we're doing this repeatedly
-          StashTabService.TrackTabContents(tab.Id, 6000, function(items){
-            tab.Items = tab.Items.concat(items);
+          StashTabService.TrackTabContents(tab.Id, 6000, function(changes){
+            // Add new items to the tab
+            tab.Items = tab.Items.concat(changes.Added);
+            // Filter out any that were removed
+            tab.Items = tab.Items.filter(i => !changes.Removed.hasOwnProperty(i.id));
           });
         }
         else {
