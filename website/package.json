@@ -16,6 +16,9 @@
     "bootstrap-toggle": "^2.2.2",
     "jquery": "^3.2.1",
     "requirejs": "^2.3.3",
-    "requirejs-domready": "^2.0.3"
+    "requirejs-domready": "^2.0.3",
+    "requirejs-plugins": "^1.0.2",
+    "requirejs-text": "^2.0.15",
+    "text": "requirejs/text"
   }
 }

@@ -94,6 +94,14 @@
                 <span class="glyphicon glyphicon-question-sign Corrupted" aria-hidden="true" ng-if="i.corrupted" title="Corrupted"></span>
               </span>
               <span class="item-name {{i.rarityClass}}">{{i.displayName}}</span>
+
+              <ul class="list-group item-affixes implicit" ng-class="(i.Affixes.Explicit.length == 0) ? 'no-explicit' : ''">
+                <li ng-repeat="im in i.Affixes.Implicit">{{im.String}}</li>
+              </ul>
+
+              <ul class="list-group item-affixes explicit" ng-class="(i.Affixes.Implicit.length == 0) ? 'no-implicit' : ''">
+                <li ng-repeat="ex in i.Affixes.Explicit">{{ex.String}}</li>
+              </ul>
             </li>
           </ul>
 

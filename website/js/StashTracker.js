@@ -13,8 +13,8 @@ define(function (require){
 		angular.bootstrap(document, ['StashTabTracker']);
 	}
 
-	StashTrackerApp.controller('StashTabController', stashTabController)
-	StashTrackerApp.service('StashTabService', stashTabService)
+	StashTrackerApp.controller('StashTabController', stashTabController);
+	StashTrackerApp.service('StashTabService', stashTabService);
 	StashTrackerApp.directive('toggleCheckbox', toggleCheckboxDirective);
 
 	StashTrackerApp.config(['$routeProvider', function ($routeProvider){

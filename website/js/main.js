@@ -5,7 +5,9 @@ require.config({
 		'angular-route': '../lib/angular-route/angular-route',
 		'jquery': '../lib/jquery/jquery',
 		'bootstrap': '../lib/bootstrap/js/bootstrap',
-		'bootstrap-toggle': '../lib/bootstrap-toggle/js/bootstrap-toggle'
+		'bootstrap-toggle': '../lib/bootstrap-toggle/js/bootstrap-toggle',
+		'text': '../lib/requirejs/text',
+		'json': '../lib/requirejs/json',
 	},
 	shim: {
 		'bootstrap': { 
@@ -21,7 +23,8 @@ require.config({
 		'angular-route': { 
 			'exports': 'ngRoute',
 			'deps': ['angular']
-		}
+		},
+		'text': {'exports': 'text'}
 	},
 	baseUrl: './js'
 });

@@ -14,6 +14,18 @@ module.exports = function (grunt) {
 				],
 				dest: 'website/lib'
 			},
+			"website-libs-requirejs-json": {
+				expand: true,
+				cwd: 'website/node_modules/requirejs-plugins/src',
+				src: 'json.js',
+				dest: 'website/lib/requirejs'
+			},
+			"website-libs-requirejs-text": {
+				expand: true,
+				cwd: 'website/node_modules/requirejs-text',
+				src: 'text.js',
+				dest: 'website/lib/requirejs'
+			},
 			"website-libs-jquery": {
 				expand: true,
 				cwd: 'website/node_modules/jquery/dist',
@@ -56,6 +68,8 @@ module.exports = function (grunt) {
 
 	grunt.registerTask('copy-website', [
 		'copy:website-libs', 
+		'copy:website-libs-requirejs-json',
+		'copy:website-libs-requirejs-text',
 		'copy:website-libs-jquery',
 		'copy:website-libs-bootstrap',
 		'copy:website-libs-bootstrap-toggle'

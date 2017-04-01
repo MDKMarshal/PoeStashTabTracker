@@ -57,6 +57,7 @@ body {
 .stash-tab-items > .list-group-item {
   background-color: #ccc;
   border-radius: 5px;
+  margin-bottom: 3px;
 }
 
 .stash-tab-items .item-rarity {
@@ -91,4 +92,46 @@ body {
 .list-group-item-cust {
   padding-left:  55px;
   padding-right: 55px;
+}
+
+ul.item-affixes {
+    text-align: -webkit-center;
+    list-style: none;
+    margin-bottom: 0px;
+}
+
+ul.item-affixes.implicit {
+    margin-top: 5px;
+}
+
+ul.item-affixes > li {
+  background-color: #eee;
+  width: 75%;
+  margin-bottom: 0px;
+}
+
+ul.item-affixes.implicit > li:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 2px solid #ccc;
+}
+
+ul.item-affixes.explicit > li {
+    border-bottom: 1px dashed #ccc;
+}
+
+ul.item-affixes.explicit > li:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom: none;
+}
+
+ul.item-affixes.explicit.no-implicit > li:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+ul.item-affixes.implicit.no-explicit > li:last-child {
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
